@@ -1,2 +1,218 @@
 # Shopify-API
- Doucmentation for the Shopify API
+// Shopify Product API documentation
+
+//Retrieve Product by ID
+GET /admin/api/2019-10/products/#{product_id}.json
+
+//Add Product To Shopify
+Post /admin/api/2019-10/products.json
+
+
+// Sample Solution with default variant
+POST /admin/api/2019-10/products.json
+{
+  "product": {
+    "title": "Burton Custom Freestyle 151",
+    "body_html": "<strong>Good snowboard!</strong>",
+    "vendor": "Burton",
+    "product_type": "Snowboard",
+    "tags": "Barnes & Noble, John's Fav, \"Big Air\""
+  }
+}
+
+// Create a new product with the default variant and base64 encoded image
+POST /admin/api/2019-10/products.json
+{
+  "product": {
+    "title": "Burton Custom Freestyle 151",
+    "body_html": "<strong>Good snowboard!</strong>",
+    "vendor": "Burton",
+    "product_type": "Snowboard",
+    "images": [
+      {
+        "attachment": "R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\n"
+      }
+    ]
+  }
+}
+
+// Create a new product with multiple product variants
+
+POST /admin/api/2019-10/products.json
+{
+  "product": {
+    "title": "Burton Custom Freestyle 151",
+    "body_html": "<strong>Good snowboard!</strong>",
+    "vendor": "Burton",
+    "product_type": "Snowboard",
+    "variants": [
+      {
+        "option1": "First",
+        "price": "10.00",
+        "sku": "123"
+      },
+      {
+        "option1": "Second",
+        "price": "20.00",
+        "sku": "123"
+      }
+    ]
+  }
+}
+
+// Create a new product with multiple product variants and multiple options
+POST /admin/api/2019-10/products.json
+{
+  "product": {
+    "title": "Burton Custom Freestyle 151",
+    "body_html": "<strong>Good snowboard!</strong>",
+    "vendor": "Burton",
+    "product_type": "Snowboard",
+    "variants": [
+      {
+        "option1": "Blue",
+        "option2": "155"
+      },
+      {
+        "option1": "Black",
+        "option2": "159"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color",
+        "values": [
+          "Blue",
+          "Black"
+        ]
+      },
+      {
+        "name": "Size",
+        "values": [
+          "155",
+          "159"
+        ]
+      }
+    ]
+  }
+}
+
+// Create a product with a metafield
+POST /admin/api/2019-10/products.json
+{
+  "product": {
+    "title": "Burton Custom Freestyle 151",
+    "body_html": "<strong>Good snowboard!</strong>",
+    "vendor": "Burton",
+    "product_type": "Snowboard",
+    "metafields": [
+      {
+        "key": "new",
+        "value": "newvalue",
+        "value_type": "string",
+        "namespace": "global"
+      }
+    ]
+  }
+}
+
+// Updates a product and its variants and images.
+PUT/admin/api/2019-10/products/#{product_id}.json
+
+// Update a product's title
+PUT /admin/api/2019-10/products/#{product_id}.json
+{
+  "product": {
+    "id": 632910392,
+    "title": "New product title"
+  }
+}
+
+// Update a product's tags
+PUT /admin/api/2019-10/products/#{product_id}.json
+{
+  "product": {
+    "id": 632910392,
+    "tags": "Barnes & Noble, John's Fav"
+  }
+}
+
+// Update a product by reordering the product variants
+PUT /admin/api/2019-10/products/#{product_id}.json
+{
+  "product": {
+    "id": 632910392,
+    "variants": [
+      {
+        "id": 457924702
+      },
+      {
+        "id": 39072856
+      },
+      {
+        "id": 49148385
+      },
+      {
+        "id": 808950810
+      }
+    ]
+  }
+}
+
+Update a product and one of its variants
+PUT /admin/api/2019-10/products/#{product_id}.json
+{
+  "product": {
+    "id": 632910392,
+    "title": "Updated Product Title",
+    "variants": [
+      {
+        "id": 808950810,
+        "price": "2000.00",
+        "sku": "Updating the Product SKU"
+      },
+      {
+        "id": 49148385
+      },
+      {
+        "id": 39072856
+      },
+      {
+        "id": 457924702
+      }
+    ]
+  }
+}
+
+Update a product's SEO title and description
+PUT /admin/api/2019-10/products/#{product_id}.json
+{
+  "product": {
+    "id": 632910392,
+    "metafields_global_title_tag": "Brand new title",
+    "metafields_global_description_tag": "Brand new description"
+  }
+}
+
+// Show a hidden product by changing the published attribute to true
+PUT /admin/api/2019-10/products/#{product_id}.json
+{
+  "product": {
+    "id": 632910392,
+    "published": true
+  }
+}
+
+// Hide a published product by changing the published attribute to false
+PUT /admin/api/2019-10/products/#{product_id}.json
+{
+  "product": {
+    "id": 632910392,
+    "published": false
+  }
+}
+
+
+
+
+Create a new product with multiple product variants
